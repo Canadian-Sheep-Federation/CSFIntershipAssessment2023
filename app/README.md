@@ -25,35 +25,30 @@ This application allows users to search for books using the Open Library API and
 3. **Error Handling**: Improve error handling in the API by providing more descriptive error messages and appropriate HTTP status codes.
 
 
-# Deployment
+## Deployment
 
-To deploy the application and API in a production environment, follow these steps:
+To deploy the application and API, follow these steps:
 
 1. **Set up a virtual machine**: Create a new virtual machine using virtualization software like VMware workstation pro. Install an operating system for the virtual machine (e.g., I use Ubuntu 20.04 LTS).
 
 2. **Install basic software**: Log in to the virtual machine, update the package list, and install basic software like curl, git, vim, etc.
 <pre>
-```Command
+```
 sudo apt-get update
 sudo apt-get install -y curl git vim
 ```
 </pre>
 3. **Install LAMP stack**:  Install Apache and PHP on the virtual machine to support the application. Also, install necessary PHP extensions such as php-pdo, php-sqlite, etc.
-<pre>
-```Command
+```
 sudo apt-get install -y apache2 php php-mysql php-pdo php-sqlite3
 ```
-</pre>
 4. **Creating new folder** : In the defult Apache directory /var/www add a create folder called "myapp"
 5. **Configure Apache**: Create a new Apache virtual host configuration file that points to the public directory of the application. Enable the virtual host and restart Apache to apply the changes
-<pre>
-```Command
+```
 sudo vim /etc/apache2/sites-available/myapp.conf
 ```
-</pre>
 In the myapp.conf file, enter the following content:
-<pre>
-```Apache
+```
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/myapp
@@ -66,7 +61,6 @@ In the myapp.conf file, enter the following content:
     </Directory>
 </VirtualHost>
 ```
-</pre>
 6.**Clone the GitHub repository**: Use the git command to clone the project repository to an appropriate location on the virtual machine. Put app files to /var/www/myapp
 7. **Change the Permissions** : Change the permission of folder /var/www/myapp and the database file: /var/www/myapp/comments.db
 8.**Test the application**: Open the index.html to test the application
