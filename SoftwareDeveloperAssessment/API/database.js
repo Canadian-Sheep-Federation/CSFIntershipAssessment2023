@@ -12,3 +12,5 @@ let db = new sql3.Database(dbsource, (err) => {
         db.run("CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, author TEXT, title TEXT, line TEXT)")
     }
 })
+
+module.exports = db

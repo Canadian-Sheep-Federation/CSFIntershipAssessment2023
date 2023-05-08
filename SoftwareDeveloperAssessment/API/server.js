@@ -42,7 +42,7 @@ app.get('/:id', (req, res) => {
 // Receive a specific user's info
 app.post('/', (req, res) => {
     if (!req.body.author || !req.body.title || !req.body.line) {
-        console.log(req)
+        console.log(req.body)
         res.status(400)
     } else {
         db.run("INSERT INTO Users (author, title, line) VALUES (?, ?, ?)", [req.body.author, req.body.title, req.body.line], function (err, result) {

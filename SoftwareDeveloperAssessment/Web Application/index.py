@@ -32,11 +32,11 @@ def get_user_data(id):
     rep = requests.get(url="http://localhost:3000/"+str(id))
     if rep.status_code != 200:
         return None
-    rep = rep.json()
-    poetry_id = rep["id"]
-    author = rep["author"]
-    title = rep["title"]
-    line = rep["line"]
+    rep = rep.json()["data"]
+    poetry_id = rep[0]["id"]
+    author = rep[0]["author"]
+    title = rep[0]["title"]
+    line = rep[0]["line"]
     return [(poetry_id, author, title, line)]
 
 # Get all User data in the backend
@@ -44,13 +44,13 @@ def get_all_user_data():
     rep = requests.get(url="http://localhost:3000/")
     if rep.status_code != 200:
         return None
-    rep = rep.json()
+    rep = rep.json()["data"]
     data = []
     for i in range(len(rep)):
-        poetry_id = rep["id"]
-        author = rep["author"]
-        title = rep["title"]
-        line = rep["line"]
+        poetry_id = rep[i]["id"]
+        author = rep[i]["author"]
+        title = rep[i]["title"]
+        line = rep[i]["line"]
         data.append((poetry_id, author, title, line))
     return data
 
