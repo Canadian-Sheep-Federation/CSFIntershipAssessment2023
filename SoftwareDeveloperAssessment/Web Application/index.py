@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask.ext.wtf import Form
 from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import Required, NumberRange
@@ -36,7 +36,7 @@ def get_user_data(id):
     author = rep["author"]
     title = rep["title"]
     line = rep["line"]
-    return author, title, line
+    return [(author, title, line)]
 
 # Get all User data in the backend
 def get_all_user_data():
@@ -94,20 +94,17 @@ def index():
                 if data is None:
                     print("Failed to get user info!")
                 else:
-                # Redirect to another page to show all users info
+                    return render_template('display.html', data=data)
             else:
-                id = int(poetry_req.id.data)
-                if id < 0:
+                poetry_id = int(poetry_req.id.data)
+                if poetry_id < 0:
                     print("Invalid id entered!")
                 else:
-                    data = get_user_data(id)
+                    data = get_user_data(poetry_id)
                     if data is None:
                         print("Failed to get user info!")
                     else:
-                        # Redirect to another page to show that specific user's info
-
-
-
+                        return render_template('display.html', data=data)
     return render_template('index.html', poetry_form=poetry_form, poetry_req=poetry_req, line=poem_line)
 
 
