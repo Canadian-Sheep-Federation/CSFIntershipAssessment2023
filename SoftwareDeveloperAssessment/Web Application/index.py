@@ -1,4 +1,5 @@
 from flask import Flask, redirect, url_for
+from flask.ext.bootstrap import Bootstrap
 from flask.ext.wtf import Form
 from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import Required, NumberRange
@@ -56,6 +57,7 @@ def get_all_user_data():
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "SomeSecretKey"
+bootstrap = Bootstrap(app)
 
 class PoetryForm(Form):
     author = StringField('Who is your favourite poetry author?', validatorss=[Required()])
@@ -71,7 +73,7 @@ class PoetryRequest(Form):
 def index():
     poetry_form = PoetryForm()
     poetry_req = PoetryRequest()
-    poem_line = ""
+    poem_line = None
     if request.method == 'POST':
         if poetry_form.validate_on_submit():
             author = poetry_form.author.data
@@ -83,7 +85,6 @@ def index():
             poem_line = get_public_data(author, title, line)
             if poem_line is None:
                 print("Poem not found from public api!")
-                poem_line = ""
         if poetry_req.is_submited():
             if not poetry_req.id.data:
                 data = get_all_user_data()
