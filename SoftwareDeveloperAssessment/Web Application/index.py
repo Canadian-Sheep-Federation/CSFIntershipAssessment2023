@@ -33,10 +33,11 @@ def get_user_data(id):
     if rep.status_code != 200:
         return None
     rep = rep.json()
+    poetry_id = rep["id"]
     author = rep["author"]
     title = rep["title"]
     line = rep["line"]
-    return [(author, title, line)]
+    return [(poetry_id, author, title, line)]
 
 # Get all User data in the backend
 def get_all_user_data():
@@ -46,10 +47,11 @@ def get_all_user_data():
     rep = rep.json()
     data = []
     for i in range(len(rep)):
+        poetry_id = rep["id"]
         author = rep["author"]
         title = rep["title"]
         line = rep["line"]
-        data.append((author, title, line))
+        data.append((poetry_id, author, title, line))
     return data
 
 app = Flask(__name__)
