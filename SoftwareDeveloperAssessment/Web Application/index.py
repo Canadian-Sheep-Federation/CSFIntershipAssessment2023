@@ -1,8 +1,7 @@
-from flask import Flask, redirect, url_for
-from flask.ext.bootstrap import Bootstrap
-from flask.ext.wtf import Form
-from wtforms import StringField, IntegerField, SubmitField
-from wtforms.validators import Required, NumberRange
+from flask import Flask, request, render_template
+from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+from wtforms.fields import StringField, IntegerField, SubmitField
 import requests
 
 # Return requested line for a particular poem
@@ -59,13 +58,13 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = "SomeSecretKey"
 bootstrap = Bootstrap(app)
 
-class PoetryForm(Form):
-    author = StringField('Who is your favourite poetry author?', validatorss=[Required()])
-    title = StringField('What is the name of your favourite poem?', validatorss=[Required()])
-    line = IntegerField('Which line of the poem is your favourite?', validatorss=[Required(), NumberRange(0)])
+class PoetryForm(FlaskForm):
+    author = StringField('Who is your favourite poetry author?')
+    title = StringField('What is the name of your favourite poem?')
+    line = IntegerField('Which line of the poem is your favourite?')
     submit = SubmitField('Submit')
 
-class PoetryRequest(Form):
+class PoetryRequest(FlaskForm):
     id = IntegerField('Which form id would you like to see? (Leave blank to view all)')
     submit = SubmitField('Submit')
 
@@ -75,7 +74,7 @@ def index():
     poetry_req = PoetryRequest()
     poem_line = None
     if request.method == 'POST':
-        if poetry_form.validate_on_submit():
+        if poetry_form.submit.data and poetry_form.validate():
             author = poetry_form.author.data
             title = poetry_form.title.data
             line = poetry_form.line.data
@@ -85,7 +84,7 @@ def index():
             poem_line = get_public_data(author, title, line)
             if poem_line is None:
                 print("Poem not found from public api!")
-        if poetry_req.is_submited():
+        if poetry_req.submit.data:
             if not poetry_req.id.data:
                 data = get_all_user_data()
                 if data is None:
