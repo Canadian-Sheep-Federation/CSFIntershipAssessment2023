@@ -2,7 +2,7 @@
 
 This application allows users to search for books using the Open Library API and add/view comments for each book. The application consists of a web frontend built using HTML, CSS, JavaScript, jQuery, and Bootstrap, and a RESTful API backend built using PHP and SQLite.
 ## Testing
-Input the address: http://192.168.1.70/ which is the ip address of the virtual machine.
+Goto the address: http://192.168.1.70/ which is the ip address of the virtual machine.
 ## Extending and Improving the Application
 
 ### Application
