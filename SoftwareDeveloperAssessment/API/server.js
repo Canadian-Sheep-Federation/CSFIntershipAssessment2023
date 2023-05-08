@@ -1,8 +1,8 @@
-import express from 'express';
-import db from "./database.js";
-import bodyParser from "body-parser";
+var express = require("express");
+var db = require("./database.js");
+var bodyParser = require("body-parser");
 
-const app = express();
+var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
