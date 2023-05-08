@@ -65,12 +65,6 @@ class PoetryRequest(Form):
     id = IntegerField('Which form id would you like to see? (Leave blank to view all)')
     submit = SubmitField('Submit')
 
-@app.route('/OtherForms', methods=['GET'])
-def otherforms():
-
-@app.route('/OtherForm/<id>', methods=['GET'])
-def otherform(id):
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     poetry_form = PoetryForm()
