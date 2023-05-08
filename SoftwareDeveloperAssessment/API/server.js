@@ -27,11 +27,10 @@ app.get('/', (req, res) => {
 
 // Get a specific user's info
 app.get('/:id', (req, res) => {
-    db.get("SELECT * FROM Users WHERE id = ?", [req.params.id], (err, row) => {
+    db.get("SELECT * FROM Users WHERE Users.id = ?", [req.params.id], (err, row) => {
         if (err) {
             res.status(400)
         } else {
-            res.status(200)
             res.json({
                 "data": row
             })
@@ -50,8 +49,7 @@ app.post('/', (req, res) => {
                 console.log(err)
                 res.status(400)
             } else {
-                res.status(200)
-                res.json({ "id": this.lastID })
+                res.json({ "id": str(this.lastID) })
             }
         });
     }

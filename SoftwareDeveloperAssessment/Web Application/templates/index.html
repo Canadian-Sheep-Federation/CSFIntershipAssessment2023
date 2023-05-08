@@ -1,5 +1,6 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% if line %}
+    <h3>User ID: {{ poetry_id }}</h3>
     <h3>Poem Line Found: {{ line }}</h3>
 {% endif %}
 {{ wtf.quick_form(poetry_form) }}

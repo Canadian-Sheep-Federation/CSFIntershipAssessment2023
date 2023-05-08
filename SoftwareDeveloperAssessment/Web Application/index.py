@@ -29,14 +29,15 @@ def store_user_data(author, title, line):
 
 # Get User data in the backend
 def get_user_data(id):
+    print(id)
     rep = requests.get(url="http://localhost:3000/"+str(id))
     if rep.status_code != 200:
         return None
     rep = rep.json()["data"]
-    poetry_id = rep[0]["id"]
-    author = rep[0]["author"]
-    title = rep[0]["title"]
-    line = rep[0]["line"]
+    poetry_id = rep["id"]
+    author = rep["author"]
+    title = rep["title"]
+    line = rep["line"]
     return [(poetry_id, author, title, line)]
 
 # Get all User data in the backend
@@ -62,29 +63,30 @@ class PoetryForm(FlaskForm):
     author = StringField('Who is your favourite poetry author?')
     title = StringField('What is the name of your favourite poem?')
     line = IntegerField('Which line of the poem is your favourite?')
-    submit = SubmitField('Submit')
+    submit1 = SubmitField('Submit')
 
 class PoetryRequest(FlaskForm):
     id = IntegerField('Which form id would you like to see? (Leave blank to view all)')
-    submit = SubmitField('Submit')
+    submit2 = SubmitField('Submit')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     poetry_form = PoetryForm()
     poetry_req = PoetryRequest()
     poem_line = None
+    poetry_id = None
     if request.method == 'POST':
-        if poetry_form.submit.data and poetry_form.validate():
+        if poetry_form.submit1.data and poetry_form.validate():
             author = poetry_form.author.data
             title = poetry_form.title.data
             line = poetry_form.line.data
-            success = store_user_data(author, title, line)
-            if success is None:
+            poetry_id = store_user_data(author, title, line)
+            if poetry_id is None:
                 print("Failed to store user info!")
             poem_line = get_public_data(author, title, line)
             if poem_line is None:
                 print("Poem not found from public api!")
-        if poetry_req.submit.data:
+        if poetry_req.submit2.data:
             if not poetry_req.id.data:
                 data = get_all_user_data()
                 if data is None:
@@ -92,16 +94,16 @@ def index():
                 else:
                     return render_template('display.html', data=data)
             else:
-                poetry_id = int(poetry_req.id.data)
-                if poetry_id < 0:
+                poet_id = poetry_req.id.data
+                if poet_id < 0:
                     print("Invalid id entered!")
                 else:
-                    data = get_user_data(poetry_id)
+                    data = get_user_data(poet_id)
                     if data is None:
                         print("Failed to get user info!")
                     else:
                         return render_template('display.html', data=data)
-    return render_template('index.html', poetry_form=poetry_form, poetry_req=poetry_req, line=poem_line)
+    return render_template('index.html', poetry_form=poetry_form, poetry_req=poetry_req, poetry_id=poetry_id, line=poem_line)
 
 
 
