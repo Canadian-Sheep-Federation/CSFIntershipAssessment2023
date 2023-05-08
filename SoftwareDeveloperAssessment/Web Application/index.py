@@ -2,6 +2,15 @@ from flask import Flask
 from flask.ext.wtf import Form
 from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import Required, NumberRange
+import requests
+
+# Return requested line for a particular poem
+def get_public_data(author, title, line):
+    req = requests.get(url="https://poetrydb.org/title/"+title+":abs/author,linecount,lines.json")
+    for i in range(len(req)):
+        if req[i]["author"] == author:
+            if line < int(req[i]["linecount"]):
+                return req[i]["lines"][line]
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "SomeSecretKey"
@@ -18,18 +27,24 @@ def otherforms():
 @app.route('/OtherForm/<id>', methods=['GET'])
 def otherform(id):
 
-@app.route('/UserForm/', methods=['POST'])
+@app.route('/UserForm/', methods=['GET'])
 def userform():
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = PoetryForm()
-    if request.method == 'GET':
-        return render_template('index.html', form=form)
-    else:
-        if poetry_form.validate_on_submit():
-            
+    poem_line = ""
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            author = form.author.data
+            title = form.title.data
+            line = form.line.data
+            poem_line = get_public_data(author, title, line)
+    return render_template('index.html', form=form, line=poem_line)
+
+
+
 
 
 
