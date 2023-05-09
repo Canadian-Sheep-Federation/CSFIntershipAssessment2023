@@ -1,9 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const db = require("./database");
 
 const app = express();
 const port = 8888;
+
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -13,7 +16,7 @@ app.get("/", (req, res) => {
     if (err) {
       res.status(400);
     } else {
-      res.send({ data: { surveys: rows } });
+      res.json({ surveys: rows });
       res.status(200);
     }
   });
@@ -29,7 +32,7 @@ app.get("/:id", (req, res) => {
     if (err) {
       res.status(400);
     } else {
-      res.send({ data: { survey: row } });
+      res.json({ surveys: [row] });
       res.status(200);
     }
   });

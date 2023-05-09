@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import "./ShowInfo.css";
 
 export const ShowInfo = ({ data }) => {

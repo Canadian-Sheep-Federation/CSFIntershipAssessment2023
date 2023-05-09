@@ -4,6 +4,7 @@ import { searchTVShows } from "../api/requests";
 import { ShowInfo } from "../components/ShowInfo";
 import { Button } from "../components/Button";
 import "./HomePage.css";
+import "./BasePage.css";
 
 export const HomePage = () => {
   const [tvShows, setTVShows] = useState([]);
@@ -25,7 +26,7 @@ export const HomePage = () => {
   return (
     <div className="home-page">
       <div className="home-page-container">
-        <div className="home-page-title-container">
+        <div className="title-container">
           <h1>TV Shows</h1>
           <Button text={"Take Survey"} action={buttonAction} />
         </div>
