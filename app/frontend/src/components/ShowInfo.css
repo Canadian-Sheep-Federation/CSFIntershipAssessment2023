@@ -1,0 +1,16 @@
+.show-info-container {
+  display: flex;
+  margin-top: 2rem;
+}
+
+.show-img-container {
+  margin-right: 1rem;
+}
+
+.show-details-title {
+  color: white
+}
+
+.show-details-premiered, .show-details-type, .show-details-rating {
+  color: rgb(184, 182, 182)
+}
