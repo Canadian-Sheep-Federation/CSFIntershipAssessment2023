@@ -1,4 +1,3 @@
-
 /* Form mongoose model */
 const mongoose = require('mongoose');
 
