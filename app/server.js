@@ -1,7 +1,21 @@
-// Set up express application
-var express = require('express');
-var app = express();
-forms = []
+// Set up requirements
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+
+// Set up database connection
+const mongoURL = process.env.DATABASE_URL || "mongodb://localhost/forms";
+mongoose.connect(mongoURL, { useNewUrlParser: true });
+const db = mongoose.connection;
+
+db.on('error', (error) => console.error(error));
+db.once('open', () => console.log('Database Connected'));
+
+
+const app = express();
+app.use(express.json());
+
+forms = [];
 
 // POST request
 app.post('/', (req, res) => {
@@ -23,5 +37,6 @@ app.get('/:id', (req, res) => {
 });
 
 
-const port = 8000;
+// Express server listening
+const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
