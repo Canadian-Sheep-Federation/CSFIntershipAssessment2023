@@ -47,11 +47,12 @@ app.post("/", (req, res) => {
   db.run(
     "INSERT INTO survey (email, showName, rating) values(?, ?, ?)",
     [data.email, data.showName, data.rating],
-    (err) => {
+    function (err) {
       if (err) {
         res.status(400);
       } else {
         res.status(201);
+        res.json({id: this.lastID})
       }
     }
   );
