@@ -16,7 +16,7 @@ db.once('open', () => console.log('Database Connected'));
 const app = express();
 app.use(express.json());
 
-// POST request
+// POST request adds form response to database
 app.post('/', (req, res) => {
   const newForm = new Form({
     name: req.body.name,
@@ -29,14 +29,14 @@ app.post('/', (req, res) => {
     .catch(err => res.status(400).json({ error: 'Form not saved', message: err.message }));
 });
 
-// GET request
+// GET request returns all form responses
 app.get('/', (req, res) => {
   Form.find()
     .then(forms => res.json(forms))
     .catch(err => res.status(500).json({ error: 'Server error', message: err.message }));
 });
 
-// GET/{id} request
+// GET/{id} request returns form with given id
 app.get('/:id', (req, res) => {
   Form.findById(req.params.id)
     .then(form => {
