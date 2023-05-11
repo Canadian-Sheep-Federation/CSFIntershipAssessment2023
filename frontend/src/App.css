@@ -1,0 +1,18 @@
+.search-form {
+  margin: 10px;
+}
+
+.excuses-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.excuses-card {
+  width: 450px;
+  margin: 10px;
+}
+
+#home {
+  margin-left: 10px;
+}
