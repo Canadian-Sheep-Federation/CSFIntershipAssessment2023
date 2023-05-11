@@ -30,6 +30,11 @@ npm start
 ```
 
 # Extensions and Improvements
-1. 
+1. **User Authentication:** User login and authentication can enable users to see excuses they have posted and ones that they have interacted with (viewed, liked/rated, etc.)
+2. **Review/Rate Excuses:** Authenticated users can rate/like certain excuses that they might want to save for the future. Users can then view all their liked excuses.  
+3. **Improved Searching Abilities:** Currently, users can only get randomized excuses based on the category. A potential improvement would be to allow users to search for specific keywords and then using fuzzy matching to display excuses with those keywords. 
+4. **UI upgrades:** The UI is pretty simple at the moment. To make improvements, icons can be added for each category, certain font weights (like the ones for input labels) can be made larger/bolder, different background colours can be used etc. 
+5. **Increasing Number of Excuses and Categories:** This is a limitation of the external public API since they have approximately 10 excuses per category and a limited number of categories. However, having more categories and excuses would provide more variety for users. 
 
 
+:)
