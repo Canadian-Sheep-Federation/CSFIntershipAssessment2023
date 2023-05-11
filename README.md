@@ -6,11 +6,14 @@ The backend is implemented using Node.js and Express.js. The frontend is impleme
 
 # Features
 1. **Home Page:** Displays up to 10 excuses for a given category. By default, 10 excuses are displayed from random categories. 
+<img src="/images/Home.png" width="600" /> 
 2. **Create Excuse:** A user can submit an excuse for a particular category. 
+<img src="/images/Create Excuse.png" width="600" /> 
 3. **View Submitted Excuses:** Displays submitted excuses. Can filter based on a specific ID.
+<img src="/images/View Excuses.png" width="600" /> 
 
 # Running the Applicaton 
-1. Download the code and open two separate terminals
+1. Download the code and open two separate terminals 
 2. In the first terminal, start the server by executing the following:
 ```
 cd backend
