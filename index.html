@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Reviews</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <h1>Movie Reviews</h1>
+  <p>Use the search bar to find the imdb poster of the movie you would like</p>
+  <p>Then feel free to leave a review with a rating.</p>
+  <input type="text" placeholder="Movie Name" id="imdb_search_query"/><button type = "button" id="imdb_search_button" onclick="getDataFromIMDB()">Find</button>
+  <div id="search_results"></div>
+  
+  <br/>
+  <input type = "text" placeholder="Movie Name" id = "name_input"/>
+  <input type="number" placeholder="Rating" id = "rating_input"/>
+  <input type = "text" placeholder="Description" id = "description_input"/>
+  <button type = "button" onclick = "postData()">Submit</button>
+  <div id = "posted_data"></div>
+  <br/>
+  <button type = "button" onclick = "getAllData()">Get All Reviews</button>
+  <div id = "all_data"></div>
+  <br/>
+  <input type = "text" placeholder="ID of form" id = "id_input"/>
+  <button type = "button" onclick = "getSpecificData()">Find</button>
+  <div id = "specific_data"></div>
+  <script src="index.js"></script>
+</body>
+</html>
