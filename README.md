@@ -12,9 +12,9 @@ The backend is implemented using Node.js and Express.js. The frontend is impleme
 # Running the Applicaton 
 1. Download the code and open two separate terminals
 2. In the first terminal, start the server by executing the following:
-    cd backend
-    npm install 
-    npm start 
+        cd backend
+        npm install 
+        npm start 
 3. In the second terminal, start the frontend by executing the following:
     cd frontend 
     npm install 
