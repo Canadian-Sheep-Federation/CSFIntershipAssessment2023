@@ -1,24 +1,24 @@
 /* Form mongoose model */
 const mongoose = require('mongoose');
 
-// Create form schema
-const formSchema = new mongoose.Schema({
-    name: {
+// Create review schema
+const reviewSchema = new mongoose.Schema({
+    showName: {
         type: String,
         required: true
     },
 
-    date: {
-        type: Date,
+    summary: {
+        type: String,
         required: true
     },
 
-    rating: {
+    review: {
         type: String,
         required: true
     },
 });
 
 // Export schema
-module.exports = mongoose.model('Form', formSchema);
+module.exports = mongoose.model('Review', reviewSchema);
 

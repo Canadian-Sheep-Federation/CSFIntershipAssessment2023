@@ -3,10 +3,10 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const Form = require('./models/form');
+const Review = require('./models/review');
 
 // Set up database connection
-const mongoURL = process.env.DATABASE_URL || "mongodb://localhost/forms";
+const mongoURL = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017";
 mongoose.connect(mongoURL, { useNewUrlParser: true });
 const db = mongoose.connection;
 
@@ -16,34 +16,34 @@ db.once('open', () => console.log('Database Connected'));
 const app = express();
 app.use(express.json());
 
-// POST request adds form response to database
+// POST request adds review to database
 app.post('/', (req, res) => {
-  const newForm = new Form({
-    name: req.body.name,
-    date: req.body.date,
-    rating: req.body.rating
+  const newReview = new Review({
+    showName: req.body.showName,
+    summary: req.body.summary,
+    review: req.body.review
   });
 
-  newForm.save()
-    .then(() => res.status(201).json(newForm))
-    .catch(err => res.status(400).json({ error: 'Form not saved', message: err.message }));
+  newReview.save()
+    .then(() => res.status(201).json(newReview))
+    .catch(err => res.status(400).json({ error: 'Review not saved', message: err.message }));
 });
 
-// GET request returns all form responses
+// GET request returns all reviews
 app.get('/', (req, res) => {
-  Form.find()
-    .then(forms => res.json(forms))
+  Review.find()
+    .then(reviews => res.json(reviews))
     .catch(err => res.status(500).json({ error: 'Server error', message: err.message }));
 });
 
-// GET/{id} request returns form with given id
+// GET/{id} request returns review with given id
 app.get('/:id', (req, res) => {
-  Form.findById(req.params.id)
-    .then(form => {
-      if (form == null) {
-        res.status(404).json({ error: 'Form not found' });
+  Review.findById(req.params.id)
+    .then(review => {
+      if (review == null) {
+        res.status(404).json({ error: 'Review not found' });
       } else {
-        res.json(form);
+        res.json(review);
       }
     })
     .catch(err => res.status(500).json({ error: 'Server error', message: err.message }));
