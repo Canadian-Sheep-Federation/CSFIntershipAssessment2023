@@ -23,7 +23,8 @@ app.use(express.json());
 app.post("/", (req, res) => {
   const { showName, summary, review } = req.body;
 
-  const sql = "INSERT INTO reviews (showName, summary, review) VALUES (?, ?, ?)"; // Query to insert data into database
+  const sql =
+    "INSERT INTO reviews (showName, summary, review) VALUES (?, ?, ?)"; // Query to insert data into database
   db.run(sql, [showName, summary, review], function (err) {
     if (err) {
       res.status(400).json({ error: "Review not saved", message: err.message });
