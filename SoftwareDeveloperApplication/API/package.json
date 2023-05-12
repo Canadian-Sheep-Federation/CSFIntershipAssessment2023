@@ -1,0 +1,29 @@
+{
+  "name": "API",
+  "version": "1.0.0",
+  "description": "Backend REST-ful API",
+  "main": "server.js",
+  "author": "Farbod Mohammadzadeh",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write \"**/*.+(js|json)\"",
+    "test": "jest --runInBand",
+    "start": "nodemon -L src/server.js"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0",
+    "mongodb-memory-server": "^8.6.0",
+    "nodemon": "^2.0.16",
+    "prettier": "^2.6.2",
+    "supertest": "^6.2.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "connect-mongo": "^4.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.3",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.4.0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "software_developer_application",
+  "version": "1.0.0",
+  "description": "My submission for the 2023 CSF internship",
+  "main": "index.js",
+  "author": "Farbod Mohammadzadeh",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "concurrently \"cd API && yarn start\" \"cd client && yarn dev\"",
+    "start": "cd server && yarn start",
+    "dev": "cd client && yarn dev"
+  },
+  "dependencies": {
+    "concurrently": "^7.1.0"
+  }
+}
