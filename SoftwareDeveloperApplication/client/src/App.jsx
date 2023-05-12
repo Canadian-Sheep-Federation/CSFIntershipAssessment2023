@@ -1,7 +1,7 @@
 import { BrowserRouter, useLocation, Route, Routes } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./App.scss";
-import { pages } from "./util/pages";
+import { pages } from "./utils/pages";
 import { Navbar } from "./components/navbar/Navbar";
 import { Footer } from "./components/footer/Footer";
 
