@@ -23,7 +23,7 @@ app.use(express.json());
 app.post("/", (req, res) => {
   const { showName, summary, review } = req.body;
 
-  const sql = "INSERT INTO reviews (showName, summary, review) VALUES (?, ?, ?)";
+  const sql = "INSERT INTO reviews (showName, summary, review) VALUES (?, ?, ?)"; // Query to insert data into database
   db.run(sql, [showName, summary, review], function (err) {
     if (err) {
       res.status(400).json({ error: "Review not saved", message: err.message });
@@ -41,7 +41,7 @@ app.post("/", (req, res) => {
 
 // GET request returns all reviews
 app.get("/", (req, res) => {
-  const sql = "SELECT * FROM reviews";
+  const sql = "SELECT * FROM reviews"; // Query to get all reviews
   db.all(sql, [], (err, rows) => {
     if (err) {
       res.status(500).json({ error: "Server error", message: err.message });
@@ -53,7 +53,7 @@ app.get("/", (req, res) => {
 
 // GET/{id} request returns review with given id
 app.get("/:id", (req, res) => {
-  const sql = "SELECT * FROM reviews WHERE id = ?";
+  const sql = "SELECT * FROM reviews WHERE id = ?"; // Query to get review by id
   db.get(sql, [req.params.id], (err, row) => {
     if (err) {
       res.status(500).json({ error: "Server error", message: err.message });

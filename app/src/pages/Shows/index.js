@@ -1,26 +1,30 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-const apiURL = "https://api.tvmaze.com/singlesearch/shows";
+const apiURL = "https://api.tvmaze.com/singlesearch/shows"; // API for searching for getting tv show data
 
+// Shows component where user can use public api to search for a TV show and review it
 class Shows extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: "",
-      reviewForm: { id: "", showName: "", summary: "" },
-      review: "",
+      show: "", // Show being searched for
+      reviewForm: { id: "", showName: "", summary: "" }, // Reivew form thats filled in by publi api
+      review: "", // Review that user will enter in
     };
   }
 
+  // Change state to reflect show user types in
   handleChange = (event) => {
     this.setState({ show: event.target.value });
   };
 
+  // Change state to reflect review user types in
   handleChangeReview = (event) => {
     this.setState({ review: event.target.value });
   };
 
+  // Call public api to search for tv show, then fill reviewForm state
   handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -40,6 +44,7 @@ class Shows extends Component {
       });
   };
 
+  // Make POST call to backend to submit review
   handleSubmitReview = (event) => {
     event.preventDefault();
 
@@ -66,6 +71,7 @@ class Shows extends Component {
 
   render() {
     return this.state.reviewForm.id ? (
+      /* Conditional rendering depending on a tv show has been searched */
       <div>
         Show: <b>{this.state.reviewForm.showName} </b>
         <br />

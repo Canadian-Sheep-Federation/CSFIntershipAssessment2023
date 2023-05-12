@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Shows from "./pages/Shows";
 import Reviews from "./pages/Reviews";
 
+// Base app with links
+
 const Layout = () => {
   return (
     <>

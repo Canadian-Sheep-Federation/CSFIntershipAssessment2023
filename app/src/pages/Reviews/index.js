@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+// Review component where user can view all reviews
 class Reviews extends Component {
   state = {
-    reviews: [],
-    id: "",
+    reviews: [], // List of reviews
+    id: "", // Current id being searched for
   };
 
+  // Makes GET call to server to get all reviews
   handleAllReviews = () => {
     axios
       .get("http://localhost:8000")
@@ -14,6 +16,7 @@ class Reviews extends Component {
       .catch((err) => alert(err));
   };
 
+  // Makes GET/{id} call to server to get review by id
   handleReviewByID = (event) => {
     event.preventDefault();
     axios
@@ -22,21 +25,19 @@ class Reviews extends Component {
       .catch((err) => alert(err));
   };
 
+  // Removes all the reviews being viewed
   handleClear = () => {
     this.setState({ reviews: [], id: "" });
   };
 
-  handleChangeShow = (event) => {
-    this.setState({ show: event.target.value });
-  };
-
+  // Function to change the state id as user types one in
   handleChangeID = (event) => {
     this.setState({ id: event.target.value });
   };
 
   render() {
     return this.state.reviews.length ? (
-      <>
+      /* Conditional rendering depending on whether state has reviews */ <>
         <button onClick={this.handleClear}>Clear reviews</button>
         {this.state.reviews.map((review) => (
           <div key={review.id}>
