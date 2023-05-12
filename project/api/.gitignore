@@ -1,0 +1,4 @@
+*.pyc
+*.pyo
+project/api/__pycache__
+project/myapi/__pycache__ 
