@@ -1,0 +1,50 @@
+extends layout
+block content
+  <div style='margin:auto; padding:10px; width:50%; text-align:center'>
+    <h1 style='color: blue;'>Cat Facts</h1>
+    <button style='width:50%; border-radius:8px; padding: 32px' onclick="getFact()">Get Cat Fact</button>
+    <div style='text-align:center; height:auto' id='fact'></div>
+    <h2>Submit Your Own Fact!</h2>
+    <form method="POST", action="/facts">
+        <label for="author">Username:</label>
+        <input type="text" size='30'name="user" required> 
+        <br></br>
+        <label for="message">Cat Fact:</label>
+        <input type="text" size='30' name="msg" required> 
+        <br></br>
+        <input type="submit" name="submit">
+    </form>
+    <br></br>
+    <div>
+        <form method='GET' action='/facts/'>
+        <button style='width:50%; border-radius:8px; padding:32px'>Show All</button>
+        </form>
+        <br></br>
+        <form id="factidform" method="GET"  action="/facts/" onsubmit="onSearch(this)">
+        <label for='id'>Fact ID:</label>
+            <input type='number' size='30' id='id' required>
+            <button type='submit'  style='border-radius:8px;' >Show Fact</button>
+        </form>
+        
+    </div>
+        ul
+            each fact in facts
+                li= fact.user + ': ' + fact.fact  
+    </div>
+  script.
+    const sqlite3 = require('sqlite3').verbose()
+    
+    async function getFact() {
+        const response = await fetch('https://meowfacts.herokuapp.com/?count=1')
+        const data = await response.json()
+        const div = document.querySelector('#fact')
+        div.style['padding'] = '10px';
+        div.innerHTML = data.data   
+    }
+
+    function onSearch(form) {
+        form.action += form.querySelector('#id').value;
+    }
+    document.querySelector('#factidform').onsubmit = function() {
+        this.setAttribute('action', "/facts/" + document.querySelector('input[name=id]').value)
+    }
