@@ -1,0 +1,16 @@
+{
+  "name": "poetry-api",
+  "version": "1.0.0",
+  "description": "RESTful API for poetry",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Nithushan Selvanesan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
+  }
+}
