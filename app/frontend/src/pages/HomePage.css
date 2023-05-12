@@ -1,0 +1,14 @@
+.home-page {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #0C374D;
+  display: flex;
+  justify-content: center;
+}
+
+.home-page-container {
+  width: 50%;
+  height: 100%;
+  min-width: 500px;
+}
+
