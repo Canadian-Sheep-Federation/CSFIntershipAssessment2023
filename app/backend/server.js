@@ -2,17 +2,18 @@
 // Set up requirements
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
-const Review = require("./models/review");
+const sqlite3 = require("sqlite3").verbose();
 const cors = require("cors");
 
 // Set up database connection
-const mongoURL = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017";
-mongoose.connect(mongoURL, { useNewUrlParser: true });
-const db = mongoose.connection;
+const dbFilePath = process.env.DB_FILE_PATH || "./data.db"; // Provide a file path for the SQLite database
+const db = new sqlite3.Database(dbFilePath);
 
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Database Connected"));
+db.serialize(() => {
+  db.run(
+    "CREATE TABLE IF NOT EXISTS reviews (id INTEGER PRIMARY KEY AUTOINCREMENT, showName TEXT, summary TEXT, review TEXT)"
+  );
+});
 
 const app = express();
 app.use(cors());
@@ -20,42 +21,48 @@ app.use(express.json());
 
 // POST request adds review to database
 app.post("/", (req, res) => {
-  const newReview = new Review({
-    showName: req.body.showName,
-    summary: req.body.summary,
-    review: req.body.review,
-  });
+  const { showName, summary, review } = req.body;
 
-  newReview
-    .save()
-    .then(() => res.status(201).json(newReview))
-    .catch((err) =>
-      res.status(400).json({ error: "Review not saved", message: err.message })
-    );
+  const sql = "INSERT INTO reviews (showName, summary, review) VALUES (?, ?, ?)";
+  db.run(sql, [showName, summary, review], function (err) {
+    if (err) {
+      res.status(400).json({ error: "Review not saved", message: err.message });
+    } else {
+      const newReview = {
+        id: this.lastID,
+        showName,
+        summary,
+        review,
+      };
+      res.status(201).json(newReview);
+    }
+  });
 });
 
 // GET request returns all reviews
 app.get("/", (req, res) => {
-  Review.find()
-    .then((reviews) => res.json(reviews))
-    .catch((err) =>
-      res.status(500).json({ error: "Server error", message: err.message })
-    );
+  const sql = "SELECT * FROM reviews";
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: "Server error", message: err.message });
+    } else {
+      res.json(rows);
+    }
+  });
 });
 
 // GET/{id} request returns review with given id
 app.get("/:id", (req, res) => {
-  Review.findById(req.params.id)
-    .then((review) => {
-      if (review == null) {
-        res.status(404).json({ error: "Review not found" });
-      } else {
-        res.json(review);
-      }
-    })
-    .catch((err) =>
-      res.status(500).json({ error: "Server error", message: err.message })
-    );
+  const sql = "SELECT * FROM reviews WHERE id = ?";
+  db.get(sql, [req.params.id], (err, row) => {
+    if (err) {
+      res.status(500).json({ error: "Server error", message: err.message });
+    } else if (row === undefined) {
+      res.status(404).json({ error: "Review not found" });
+    } else {
+      res.json(row);
+    }
+  });
 });
 
 // Express server listening

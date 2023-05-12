@@ -53,7 +53,7 @@ class Shows extends Component {
       .post("http://localhost:8000", req)
       .then((res) =>
         alert(
-          `Review for ${res.data.showName} successfully created! ID of review: ${res.data._id}`
+          `Review for ${res.data.showName} successfully created! ID of review: ${res.data.id}`
         )
       )
       .catch((err) => alert(err));

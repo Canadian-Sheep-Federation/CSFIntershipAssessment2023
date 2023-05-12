@@ -39,9 +39,9 @@ class Reviews extends Component {
       <>
         <button onClick={this.handleClear}>Clear reviews</button>
         {this.state.reviews.map((review) => (
-          <div key={review._id}>
+          <div key={review.id}>
             <hr />
-            <p>Review ID: {review._id}</p>
+            <p>Review ID: {review.id}</p>
             <p>
               Show name: <b>{review.showName}</b>
             </p>
