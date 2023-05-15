@@ -8,7 +8,7 @@ export default function Post() {
   const [city, setCity] = useState([])
   const [description, setDescription] = useState([])
   const [jsonData, setJsonData] = useState([])
-
+  //const json
   const submitdescription = (e) => {
     e.preventDefault()
 
