@@ -8,7 +8,8 @@ import Navbar from './Navbar'
 
 
 function App() {
-  
+  // This function defines the main App component that renders other components
+
   return (
     <div className="App">
       <Router>

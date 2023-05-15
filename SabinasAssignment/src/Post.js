@@ -4,6 +4,8 @@ import form from 'react-bootstrap/form'
 import axios from 'axios'
 
 export default function Post() {
+  // Define state variables for the temperature, city, description and the JSON data
+
   const [temperature, setTemperature] = useState(0)
   const [city, setCity] = useState([])
   const [description, setDescription] = useState([])
@@ -11,24 +13,22 @@ export default function Post() {
   //const json
   const submitdescription = (e) => {
     e.preventDefault()
+    // Define an object containing the city, temperature and description fields
 
     var details = {
-       city,
-       temperature,
-       description,
+      city,
+      temperature,
+      description,
     }
-
+    // Define an object containing the city, temperature and description fields
 
     const formBody = JSON.stringify(details)
     console.log(details)
-   
 
     // Send POST request
     axios
       .post('http://localhost:8000/', details)
       .then((response) => {
-      
-        
         // Reset fields to the default values
         setCity('')
         setDescription('')

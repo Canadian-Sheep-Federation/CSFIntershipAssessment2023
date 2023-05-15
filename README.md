@@ -10,7 +10,7 @@ axios: "^0.24.0"
 express
 sqlite3
 ```
-cd app/backend
+cd SabinasAssignment/backend
 npm install
 node api.js
 ```
@@ -24,7 +24,7 @@ Alternatively, users can click on the "location" button to get the weather infor
 ```
 cd SabinasAssignment
 npm install
-npm run start
+npm  start
 ```
 Now the web application will open up and you can access it at http://localhost:3000/.
 

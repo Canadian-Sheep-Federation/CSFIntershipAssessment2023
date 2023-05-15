@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import axios from 'axios'
+// This code imports necessary dependencies and defines a functional component 'History'
 
 function History() {
+  // This code initializes and sets states for formData, id, and newId
+
   const [formData, setFormData] = useState([])
   const [id, setID] = useState('')
   const [newId, setNewID] = useState([])
+  // This code uses the useEffect hook to fetch data from the server and sets the fetched data to the formData state
 
   useEffect(() => {
-    
     const fetchData = async () => {
       const response = await fetch(`http://localhost:8000/`)
       const data = await response.json()
@@ -17,6 +20,7 @@ function History() {
     }
     fetchData()
   }, [])
+  // This code defines a function 'SearchID' that fetches data from the server based on the id and sets it to the newId state
 
   const SearchID = (event) => {
     event.preventDefault() // stop form submission
@@ -32,7 +36,6 @@ function History() {
           const result = JSON.stringify(response.data)
           const resultContainer = document.getElementById('result-container')
           resultContainer.innerHTML = result
-          
         })
         .catch((error) => {
           console.log(error)

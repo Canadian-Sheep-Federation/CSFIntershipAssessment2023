@@ -5,6 +5,8 @@ import axios from 'axios'
 
 
 export default function Templates() {
+  // Define state variables
+
   const [weatherData, setWeatherData] = useState(' ')
   const [newCity, setnewCity] = useState('')
   const [newtemperature, setnewtemperature] = useState('')
@@ -13,17 +15,18 @@ export default function Templates() {
   let apiKey = '98d48454e89814601d0a8ebb1acd57ae'
   let units = 'metric'
   useEffect(() => {
-    // This code will be executed when the component mounts
+    // useEffect() hook to execute the code when the component mounts
     handleFormSubmit({ target: { value: 'Amsterdam' } })
   }, [])
+  // Function to handle form submission
 
   const handleFormSubmit = (event) => {
-    
-  
     const cityInput = document.getElementById('city-input')
     console.log(cityInput)
-    const city = cityInput.value 
+    const city = cityInput.value
     console.log(city)
+    // Make an API call to OpenWeatherMap
+
     if (city) {
       axios
         .get(
@@ -37,31 +40,30 @@ export default function Templates() {
           console.log(error)
         })
     }
+    // Add an event listener to automatically search for Amsterdam on page load
+
     window.addEventListener('load', () => {
       const cityInput = document.getElementById('city-input')
       cityInput.value = 'Amsterdam'
       handleFormSubmit(new Event('submit'))
     })
-
-    
-   
+    // Function to create a new query
 
     const createQuery = () => {
-        newCity = prompt(`Enter a new city}:`)
-        
-        axios
-          .post(`http://localhost:8000/form`)
-          .then((response) => {
-            console.log('Template created ', response.data)
-            
-          })
-          .catch((error) => {
-            console.log(error)
-            console.log(error.response.data.message)
-          })
-      
+      newCity = prompt(`Enter a new city}:`)
+
+      axios
+        .post(`http://localhost:8000/form`)
+        .then((response) => {
+          console.log('Template created ', response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+          console.log(error.response.data.message)
+        })
     }
-    
+    // Function to display the temperature data
+
     function showTemperature(response) {
       let temperatureElement = document.querySelector('#temp-today')
       let cityElement = document.querySelector('#city-header')
@@ -75,17 +77,16 @@ export default function Templates() {
       descriptionElement.innerHTML = response.data.weather[0].description
       humidityElement.innerHTML = response.data.main.humidity
       windElement.innerHTML = Math.round(response.data.wind.speed)
-      
+      // Set the icon for today's weather
+
       iconTodayElement.setAttribute(
         'src',
         `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
       )
-   //   getForecast(response.data.coord)
+      //   getForecast(response.data.coord)
       console.log(response.data)
     }
-   
 
-    
     function showPosition(position) {
       let latitude = position.coords.latitude
       let longitude = position.coords.longitude
@@ -100,9 +101,7 @@ export default function Templates() {
     }
     let locationButton = document.querySelector('.location-button')
     locationButton.addEventListener('click', getCurrentPosition)
-    
   }
-  
 
   let now = new Date()
   let days = [
@@ -140,13 +139,6 @@ export default function Templates() {
   if (currentMinutes < 10) {
     currentMinutes = `0${currentMinutes}`
   }
-  
-    
-
-
-   
-
-
 
   return (
     <div class="container">
@@ -159,7 +151,6 @@ export default function Templates() {
                   type="text"
                   placeholder="Enter your city here"
                   id="city-input"
-                  
                   autoFocus="on"
                 />
               </div>
@@ -168,7 +159,6 @@ export default function Templates() {
                   type="submit"
                   value="Search"
                   class="search-button"
-                
                   onClick={handleFormSubmit}
                 />
               </div>
@@ -177,7 +167,6 @@ export default function Templates() {
                   <i class="fas fa-map-pin" id="location-icon"></i>
                 </button>
               </div>
-              
             </div>
           </form>
           <div class="row">
