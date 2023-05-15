@@ -1,0 +1,94 @@
+@import "../../utils/mixins.scss";
+
+.navbar-container {
+  position: fixed;
+  top: 0;
+  height: 10vh;
+  background-color: rgb(10, 40, 149);
+  width: 100%;
+  margin-bottom: 10vh;
+}
+
+.navbar-info-logo {
+  width: 38px;
+  height: 38px;
+
+  margin-left: 15px;
+  margin-right: 40px;
+}
+
+.navbar-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-top: 2.5vh;
+}
+
+.navbar-container a {
+  text-decoration: none;
+  background: none;
+}
+
+.navbar-sub-container {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+
+  margin-right: 25px;
+  margin-left: 25px;
+
+  height: 35px;
+  width: 80px;
+
+  border-radius: 5px;
+
+  &:hover,
+  &:active {
+    color: #410e49;
+    transition: color 200ms;
+
+    .navbar-underline {
+      background-color: #ae22c4df;
+      transition: background-color 200ms;
+    }
+  }
+  .navbar-underline {
+    transition: background-color 200ms;
+  }
+}
+
+.navbar-link {
+  position: absolute;
+  color: #877129;
+  font-size: 16px;
+  font-weight: 700;
+
+  .navbar-underline {
+    color: #d669e7;
+    transition: background-color 200ms;
+  }
+}
+
+.navbar-underline {
+  align-self: flex-end;
+  width: 80px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.underline-page-selected {
+  background-color: #d669e7;
+  align-self: flex-end;
+  width: 80px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: background-color 200ms;
+}
+.underline-page-unselected {
+  opacity: 0;
+
+  transition: background-color 200ms;
+}
