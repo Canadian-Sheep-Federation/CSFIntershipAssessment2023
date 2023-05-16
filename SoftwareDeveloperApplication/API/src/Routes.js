@@ -15,7 +15,20 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+/**
+ * Create base root post request to save a new activity
+ */
+router.post("/", async (req, res, next) => {
+  try {
+    const activityInfo = req.body;
 
+    const activity = await MongoDBServices.saveActivity(activityInfo);
+
+    res.status(200).send({ activity });
+  } catch (error) {
+    next(error);
+  }
+});
 /**
  * Create /request route to get a new activity from Bored API
  */
@@ -66,15 +79,14 @@ router.put("/done/:id", async (req, res, next) => {
     next(error);
   }
 });
-
 /**
- * Create base root post request to save a new activity
+ * Create /delete/:id route to deleted a done activity
  */
-router.post("/", async (req, res, next) => {
+router.delete("/delete/:id", async (req, res, next) => {
   try {
-    const activityInfo = req.body;
+    const activityId = req.params.id;
 
-    const activity = await MongoDBServices.saveActivity(activityInfo);
+    const activity = await MongoDBServices.deleteActivity(activityId);
 
     res.status(200).send({ activity });
   } catch (error) {

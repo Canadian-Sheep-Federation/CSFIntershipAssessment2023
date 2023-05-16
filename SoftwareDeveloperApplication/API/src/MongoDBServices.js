@@ -60,6 +60,20 @@ const MongoDBServices = {
       );
     });
   },
+  async deleteActivity(activityId) {
+    return new Promise((resolve, reject) => {
+      ActivityModel.findOneAndDelete(
+        { _id: activityId },
+        (error, deleteActivity) => {
+          if (error || !deleteActivity) {
+            reject("UNABLE_TO_DELETE_ANNOUNCEMENT");
+          } else {
+            resolve(deleteActivity);
+          }
+        }
+      );
+    });
+  },
 };
 
 module.exports = MongoDBServices;

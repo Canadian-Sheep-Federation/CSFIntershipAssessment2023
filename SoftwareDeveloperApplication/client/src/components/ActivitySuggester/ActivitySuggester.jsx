@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./ActivitySuggester.scss";
 import useAxios from "../../utils/useAxios";
 
 const ActivitySuggester = () => {
   // initialize all the state required for the request form
-  const [accessibility, setAccessibility] = useState(0.42);
+  const [accessibility, setAccessibility] = useState(0);
   const [type, setType] = useState("any");
-  const [participants, setParticipants] = useState(3);
-  const [price, setPrice] = useState(1);
+  const [participants, setParticipants] = useState(1);
+  const [price, setPrice] = useState(0);
   const types = [
     "any",
     "education",
@@ -21,9 +21,33 @@ const ActivitySuggester = () => {
     "music",
     "busywork",
   ];
+  const [options, setOptions] = useState({});
   // initialize the state required for saving
   const [activity, setActivity] = useState();
+  const [random, setRandom] = useState(false);
   const [likely, setLikely] = useState(0);
+
+  const { axios } = useAxios();
+
+  // add option for random activity
+  useEffect(() => {
+    if (!random) {
+      setOptions({
+        accessibility,
+        type,
+        participants,
+        price,
+      });
+    } else {
+      setOptions({
+        accessibility: "",
+        type: "",
+        participants: "",
+        price: "",
+      });
+    }
+  }, [random, accessibility, type, participants, price]);
+
   // the component is made up of two forms. One for requesting of an activity and one for saving it to the database
   return (
     <>
@@ -31,10 +55,15 @@ const ActivitySuggester = () => {
         <div className="activity-request-form">
           <form
             className="request-form"
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
+              /** 
+                    On submit of the form send all info to the backend
+                    */
               event.preventDefault();
-              console.log({ accessibility, type, participants, price });
-              setActivity(Math.random() * 10000);
+
+              axios.post("/request", options).then((response) => {
+                setActivity(response.data.activity);
+              });
             }}
           >
             <label>
@@ -80,7 +109,7 @@ const ActivitySuggester = () => {
                 type="range"
                 min={0}
                 max={1.0}
-                step={0.01}
+                step={0.1}
                 value={price}
                 id="price"
                 onChange={(value) => {
@@ -102,7 +131,7 @@ const ActivitySuggester = () => {
                 type="range"
                 min={0.0}
                 max={1.0}
-                step={0.01}
+                step={0.1}
                 value={accessibility}
                 id="accessibility"
                 onChange={(value) => {
@@ -113,6 +142,19 @@ const ActivitySuggester = () => {
 
             <br />
             <input name="submit" type="submit" value="Get An Activity" />
+            <label>
+              {" "}
+              random?{" "}
+              <input
+                type="checkbox"
+                id="random"
+                name="random"
+                checked={random}
+                onChange={() => {
+                  setRandom(!random);
+                }}
+              />
+            </label>
           </form>
         </div>
         <div className="activity-suggested">
@@ -122,35 +164,56 @@ const ActivitySuggester = () => {
 
               <br />
 
-              <h3 className="rainbow rainbow_text_animated">{activity}</h3>
+              <h3 className="rainbow rainbow_text_animated">
+                {activity.error ? activity.error : activity.activity}
+              </h3>
 
-              <form
-                className="save-form"
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  setActivity();
-                }}
-              >
-                <label>
-                  How likely to do it: {likely}
+              {activity.error ? (
+                <></>
+              ) : (
+                <form
+                  className="save-form"
+                  onSubmit={(event) => {
+                    /** 
+                    On submit of the form send all info to the backend
+                    */
+                    event.preventDefault();
+                    const details = {
+                      name: activity.activity,
+                      type: activity.type,
+                      participants: activity.participants,
+                      price: activity.price,
+                      key: activity.key,
+                      accessibility: activity.accessibility,
+                      rating: likely,
+                    };
+                    axios.post("/", details).then((response) => {
+                      console.log(response.data.activity);
+                      setActivity();
+                    });
+                  }}
+                >
+                  <label>
+                    How likely to do it: {likely}
+                    <br />
+                    <input
+                      name="likely"
+                      type="range"
+                      min={0}
+                      max={10}
+                      step={0.5}
+                      value={likely}
+                      id="likely"
+                      onChange={(value) => {
+                        setLikely(value.target.value);
+                      }}
+                    />
+                  </label>
                   <br />
-                  <input
-                    name="likely"
-                    type="range"
-                    min={0}
-                    max={10}
-                    step={0.5}
-                    value={likely}
-                    id="likely"
-                    onChange={(value) => {
-                      setLikely(value.target.value);
-                    }}
-                  />
-                </label>
-                <br />
 
-                <input name="submit" type="submit" value="Save Activity" />
-              </form>
+                  <input name="submit" type="submit" value="Save Activity" />
+                </form>
+              )}
             </>
           ) : (
             <></>
