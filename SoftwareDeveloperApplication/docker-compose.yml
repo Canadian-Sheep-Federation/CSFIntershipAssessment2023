@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: dev-mongo
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+      - MONGO_INITDB_DATABASE=$MONGODB_DBNAME
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-volume:/data/db
+  api:
+    build: ./API
+    container_name: API
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=$API_NODE_ENV
+      - PORT=$API_PORT
+      - MONGODB_USER=$MONGODB_USER
+      - MONGODB_PASSWORD=$MONGODB_PASSWORD
+      - MONGODB_DBNAME=$MONGODB_DBNAME
+      - CLIENT_BASE_URL=$CLIENT_BASE_URL
+      - API_BASE_URL=$API_BASE_URL
+      - USER_SESSION_SECRET=$USER_SESSION_SECRET
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./API/src:/app/src
+  client:
+    build: ./client
+    container_name: client
+    environment:
+      - VITE_API_BASE_URL=$API_BASE_URL
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client/src:/app/src

@@ -43,7 +43,7 @@ const ActivitySuggester = () => {
                 name="participants"
                 type="range"
                 min={1}
-                max={15}
+                max={5}
                 step={1}
                 value={participants}
                 id="participants"
