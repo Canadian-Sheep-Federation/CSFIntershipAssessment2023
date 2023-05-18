@@ -27,11 +27,13 @@ REACT_APP_API_KEY = your_apikey
 5. In your terminal, execute the following:
 ```
 cd react-node-app/server
+npm install
 npm start
 ```
 6. In another terminal, execute the following:
 ```
 cd react-node-app/client
+npm install
 npm start
 ```
 
