@@ -11,8 +11,8 @@ See you there 👋
 
 # TechStack
 
-Frontend: React
-Backend: Node.js Express.js Sequelize Sqlite
+- Frontend: React
+- Backend: Node.js Express.js Sequelize Sqlite
 
 API used for the picnic wizard: https://spoonacular.com/food-api/docs
 
