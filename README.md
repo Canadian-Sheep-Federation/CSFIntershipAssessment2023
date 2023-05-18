@@ -1,5 +1,5 @@
 # Overview
-Come to my picnic party!
+Hooray! You're invited my picnic party!
 
 To RSVP (spots limited! act fast) simply fill out the provided form on the page:
 <img src="/images/form.png" /> 
