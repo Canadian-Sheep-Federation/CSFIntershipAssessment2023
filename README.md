@@ -1,10 +1,10 @@
 # Overview
 Hooray! You're invited my picnic party!
 
-To RSVP (spots limited! act fast) simply fill out the provided form on the page:
+- To RSVP (spots limited! act fast) simply fill out the provided form on the page:
 <img src="/images/form.png" /> 
 
-If you're stuck on what to bring, the picnic wizard can help!
+- If you're stuck on what to bring, the picnic wizard can help!
 <img src="/images/wizard.png" /> 
 
 See you there 👋
