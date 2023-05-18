@@ -1,0 +1,16 @@
+Country fetch using REST Countries API:https://restcountries.com/.
+Prerequisites:
+Node.js: Ensure that Node.js is installed on your machine. You can download it from the official Node.js website: https://nodejs.org
+
+Setup:
+first type :npm init -y on your command
+second: npm install express,
+third: npm install mongodb
+
+Run:
+type node app
+open http://localhost:3000 on your brower
+
+You can type country name on the top box then click add it. you should see the country information on your brower.
+
+Each country You can see a button more info, click it you will see more information about your selected country.
