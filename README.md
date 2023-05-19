@@ -1,7 +1,15 @@
 # CSF Intership Assessment 2023
 
-If you are interested in an internship opportunity with the Canadian Sheep Federation for Summer 2023, please complete the tasks outlined in the .md file relevant to what you are interested in doing this summer.
+# SoftwareDeveloperAssessment
 
-E.g. those interested in QA should complete the QA assignment.
+This is an adopt a pet application made with node js, express, and mongodb. You can add pets for adoption, update pet information, and delete pets from the database.
 
-Submissions are accepted via pull request. If you are not comfortable creating a pull request / have never done it, feel free to submit to your contact at the CSF via an emailed zip file.
+To run this web application:
+
+1. In terminal type: ``` npm start ```
+2. Open up http://localhost:3000 on browser
+3. Enjoy!
+
+Note on Assesment: 
+I was not able to get the application to consume the public api key, possibly because the api key is faulty. However, what I would have done for the application to consume a public api can be seen in ./server/model/model.js
+
