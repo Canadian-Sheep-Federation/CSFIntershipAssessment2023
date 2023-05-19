@@ -6,9 +6,10 @@ This is an adopt a pet application made with node js, express, and mongodb. You 
 
 To run this web application:
 
-1. In terminal type: ``` npm start ```
-2. Open up http://localhost:3000 on browser
-3. Enjoy!
+1. In terminal type: ``` npm install ```
+2. In terminal type: ``` npm start ```
+3. Open up http://localhost:3000 on browser
+4. Enjoy!
 
 Note on Assesment: 
 I was not able to get the application to consume the public api key, possibly because the api key is faulty. However, what I would have done for the application to consume a public api can be seen in ./server/model/model.js
