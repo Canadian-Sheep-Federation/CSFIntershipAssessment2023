@@ -14,3 +14,6 @@ To run this web application:
 Note on Assesment: 
 I was not able to get the application to consume the public api key, possibly because the api key is faulty. However, what I would have done for the application to consume a public api can be seen in ./server/model/model.js
 
+Discuss how the application and api could be extended and improved
+
+The application could be extended by being able to choose from various pet shelters, and then adding, deleting, updating pet information within each pet shelter.
