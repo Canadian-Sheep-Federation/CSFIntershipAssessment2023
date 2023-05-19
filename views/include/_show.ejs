@@ -1,0 +1,17 @@
+<% for(var i = 0; i < pets.length; i++) { %>
+<tr>
+    <td><%= i + 1 %></td>
+    <td><%= pets[i].name %></td>
+    <td><%= pets[i].age %></td>
+    <td><%= pets[i].breed %></td>
+    <td>
+        <a href="/update-pet?id=<%= pets[i]._id%>" class = "btn border-shadow update">
+            <span class = "text-gradient"><i class="fas fa-pencil-alt"></i></span>
+        </a>
+        <a href="/delete/<%= pets[i]._id%>" class = "btn border-shadow delete" data-id=<%= pets[i]._id%>>
+            <span class = "text-gradient"><i class="fas fa-times"></i></span>
+        </a>
+
+    </td>
+</tr>
+<% } %>

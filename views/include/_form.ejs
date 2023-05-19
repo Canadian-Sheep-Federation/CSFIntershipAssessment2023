@@ -1,0 +1,23 @@
+        <!-- form handling -->
+        <form action="/api/pets" method="POST" id = "add_pet">
+            <div class="new_pet">
+                <div class="form-group">
+                    <label for="name" class = "text-light">Name</label>
+                    <input type="hidden" name="id" value="">
+                    <input type="text" name="name" value="" placeholder="Jerry">
+                </div>
+                <div class="form-group">
+                    <label for="age" class="text-light">Age</label>
+                    <input type="text" name="age" value="" placeholder="puppy">
+                </div>
+                <div class="form-group">
+                    <label for="breed" class="text-light">Breed</label>
+                    <input type="text" name="breed" value="" placeholder="american bulldog">    
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn text-dark update">Save</button>
+                </div>
+                
+            </div> 
+        </form>
