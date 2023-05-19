@@ -6,9 +6,9 @@ designed to test your knowledge of the concepts involved.
 
 You will create the following:
 
--   An API that writes to a data store
--   A web application that consumes the API you\'ve developed and a
-    public API of your choosing
+- An API that writes to a data store
+- A web application that consumes the API you\'ve developed and a
+  public API of your choosing
 
 If you\'ve never created an API or a web-application, don\'t worry. Give
 it your best shot and leave detailed comments and documentation for what
@@ -36,11 +36,11 @@ CSF, we use mongodb. A good option for this assessment could be sqlite.
 
 The API must have the following endpoints:
 
--   POST /: Takes in the form and stores it in your chosen data store.
-    Should return the id of the newly created form response.
--   GET /{id}: Returns the form corresponding to the id. E.g. GET /1
-    would return the form corresponding to the id 1
--   GET /: Returns all responses to the form
+- POST /: Takes in the form and stores it in your chosen data store.
+  Should return the id of the newly created form response.
+- GET /{id}: Returns the form corresponding to the id. E.g. GET /1
+  would return the form corresponding to the id 1
+- GET /: Returns all responses to the form
 
 Be sure to document your code thoroughly and include instructions for
 how to run your api.
@@ -49,15 +49,21 @@ how to run your api.
 
 You must build a web application that:
 
--   Allows users to query the public API you\'ve selected
--   Allows users to enter responses to the form you designed earlier and
-    view the other responses to the form
+- Allows users to query the public API you\'ve selected
+- Allows users to enter responses to the form you designed earlier and
+  view the other responses to the form
 
 # Bonus Points
 
 ## Discuss how the application and api could be extended and improved
 
+- Add authentication: I could add authentication or "accounts" so a person can have their own secure and private access to saved cat facts.
+- Styling: I could spend more time styling the web app so it is more user friendly and eye-catching.
+- Simpler unique IDs: I used the default Firebase IDs provided to have the web app access specific cat facts. I could generate shorter unique IDs so the app is more user friendly.
+
 ## Discuss how the application and api should be deployed
+
+See the associated README file.
 
 ## Intuitive design and user interface
 
