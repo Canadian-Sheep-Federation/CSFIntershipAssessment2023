@@ -10,7 +10,7 @@ To use the web app follow the instructions:
 
 1. This web app uses ReactJS and NodeJS. Please download the latest version of NodeJS.
 2. Copy the cat-fact-API-app folder and everything inside into onto your computer/working environment.
-3. Run "npm install" to download all the necessary dependencies. If needed, run "npm audit fix --force" to fix broken dependencies.
+3. Inside the cat-fact-API-app folder, run "npm install" to download all the necessary dependencies. If needed, run "npm audit fix --force" to fix broken dependencies.
 4. Run "npm start" to get the app running.
 
 The web app should be running and look something like: 
