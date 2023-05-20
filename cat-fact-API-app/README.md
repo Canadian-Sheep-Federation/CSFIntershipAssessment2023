@@ -15,6 +15,8 @@ To use the web app follow the instructions:
 
 The web app should be running and look something like: 
 
+![cat-img](cat-img.png)
+
 In the first section, you can get facts from the public API. The public API only takes positive whole numbers as IDs for specific cat facts. Or you can get a random cat fact.
 
 In the second section, you can save (POST) a fact to a a firebase database - simply fill in the fields.
