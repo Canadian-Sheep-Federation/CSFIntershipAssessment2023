@@ -5,6 +5,3 @@ If you are interested in an internship opportunity with the Canadian Sheep Feder
 E.g. those interested in QA should complete the QA assignment.
 
 Submissions are accepted via pull request. If you are not comfortable creating a pull request / have never done it, feel free to submit to your contact at the CSF via an emailed zip file.
-
-
-**I submitted both the AI and software developer projects here on Github. I sent the QA answers via email as instructed.**
