@@ -59,3 +59,28 @@ app.get('/:id', async (req, res) => {
     throw new Error('No child found with the specified ID.');
   }
 })
+
+
+//POST: get food description from API
+app.post('/foodItem', async (req, res) => {
+  var { foodEaten } = req.body;
+
+  try {
+    const foodsToSelectFrom = [];
+
+    // Querying the API
+    const response = await axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodEaten}`, {
+      headers: {
+        "Content-Type": "application/json",
+        'x-api-key': `${process.env.API_KEY}`
+      },
+    })
+
+    for (let i = 0; i < 10; i++) {
+      foodsToSelectFrom.push(response.data.foods[i]["description"])
+    }
+    res.send(foodsToSelectFrom)
+  } catch (err) {
+    console.log(err);
+  }
+})
