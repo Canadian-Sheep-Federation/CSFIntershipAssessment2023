@@ -56,7 +56,6 @@ function MainForm() {
     }
   }
 
-
   const handleViewAllSubmitted = async (e) => {
     setViewAllSubmitted(!viewAllSubmitted);
     setButtonText(buttonText);
