@@ -34,3 +34,28 @@ async function start() {
   });
 }
 start()
+
+// GET: get all children's data
+app.get('/', async (req, res) => {
+  try {
+    let allChildData = await dataModel.find({})  // all child data
+    res.json({ allChildData })
+  } catch (err) {
+    console.log(err);
+    res.json({ msg: "Error: Could not get child data." })
+  }
+})
+
+
+//GET: get a child's data (by id)
+app.get('/:id', async (req, res) => {
+
+  var reqParamsID = req.params.id
+  var foundChild = await dataModel.find({ "id": reqParamsID })
+
+  if (foundChild.length != 0) {
+    res.json(foundChild)
+  } else {
+    throw new Error('No child found with the specified ID.');
+  }
+})
