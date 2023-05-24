@@ -84,3 +84,42 @@ app.post('/foodItem', async (req, res) => {
     console.log(err);
   }
 })
+
+//GET: get food sugar amount from API
+app.post('/foodItem2', async (req, res) => {
+
+  const { foodEatenSelected } = req.body
+
+  try {
+    // add food items to array
+    const foodsToSelectFrom = [];
+    var gramSugarPerServing = 0;
+
+    // Use actual API
+    const response = await axios.get(`https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodEatenSelected}`, {
+      headers: {
+        "Content-Type": "application/json",
+        'x-api-key': `${process.env.API_KEY}`
+      },
+    })
+
+    for (let i = 0; i < 10; i++) {
+      foodsToSelectFrom.push(response.data.foods[i]["description"])
+
+      // Put if statement here. If foodEaten == description in json, set gramSugarPerServing to be the gram value from API
+      // Find correct food
+      if ((response.data.foods[i]["description"] == foodEatenSelected)) {
+
+        // Find correct food nutrient
+        for (let j = 0; j < (response.data.foods[i]["foodNutrients"]).length; j++) {
+          if (response.data.foods[i]["foodNutrients"][j]["nutrientName"] == "Sugars, total including NLEA") {
+            gramSugarPerServing = response.data.foods[i]["foodNutrients"][j]["value"]
+          }
+        }
+      }
+    }
+    res.send({ gramSugarPerServing })
+  } catch (err) {
+    console.log(err);
+  }
+})
