@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { TextField } from '@material-ui/core';
 import Button from '@mui/material/Button';
 import axios from 'axios'
+import ViewAllAndSearch from './ViewAllAndSearch';
 
 function MainForm() {
   const [childID, setchildID] = useState('');
@@ -64,7 +65,7 @@ function MainForm() {
   return (
     <div>
       <div>
-        <form className='main-form'>
+      {viewAllSubmitted ? <ViewAllAndSearch /> : <form className='main-form'>
           <div>Child's id:&nbsp;&nbsp;
             <TextField
               className='textfield'
@@ -114,11 +115,11 @@ function MainForm() {
             <p>Submit</p>
           </Button>
 
-        </form>
+        </form>}
       </div>
 
       <Button onClick={handleViewAllSubmitted} variant="contained" size="small" style={{ width: 200, height: 30, borderRadius: 5, margin: 10 }} to="/">
-        View all submitted
+        {viewAllSubmitted ? "Back to form" : "View all submitted"}
       </Button>
     </div>
   )

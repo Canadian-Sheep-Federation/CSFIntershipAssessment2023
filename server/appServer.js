@@ -8,8 +8,9 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Connect to database
+// Connect to database and create model
 const { connectDB } = require('./connectDB.js')
+const dataModel = require('./dataSchema.js')
 
 // Use CORS
 const cors = require('cors');
@@ -121,5 +122,54 @@ app.post('/foodItem2', async (req, res) => {
     res.send({ gramSugarPerServing })
   } catch (err) {
     console.log(err);
+  }
+})
+
+
+// POST: create a new child data entry
+app.post('/', async (req, res) => {
+  try {
+    const childIDInt = parseInt(req.body.childID);
+    const foodEaten = [req.body.foodEaten];
+    const quantity = [req.body.quantityEaten];
+    const gramSugarPerServing = [req.body.gramSugarPerServing]
+
+    dataModel.findOne({ "id": req.body.childID }).then((result) => {
+      if (result) {
+        // item exists, update it
+        dataModel.updateOne(
+          { id: req.body.childID },
+          {
+            $push: {
+              foodEaten: foodEaten,
+              quantity: quantity,
+              gramSugarPerServing: gramSugarPerServing
+            }
+          }
+        ).then((result) => {
+          // handle result of update operation
+          res.json({ result })
+        }).catch((err) => {
+          console.log(err)
+        });
+      } else {
+        var childData = {
+          id: req.body.childID,
+          name: req.body.childName,
+          foodEaten: foodEaten,
+          quantity: quantity,
+          gramSugarPerServing: req.body.gramSugarPerServing
+        }
+        dataModel.create(childData)
+        res.json({ childData })
+      }
+    }).catch((err) => {
+      console.log(err)
+    });
+
+  } catch (err) {
+    console.log(err)
+    res.json({ msg: "Error adding child data" })
+    throw new Error('Could not insert data to database.');
   }
 })
