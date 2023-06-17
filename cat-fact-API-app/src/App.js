@@ -60,7 +60,7 @@ function App() {
 
   const addFactHandler = async (fact) => {
     const response = await fetch(
-      "https://rand-cat-facts-default-rtdb.firebaseio.com/facts.json",
+      "YOUR DATABASE",
       {
         method: "POST",
         body: JSON.stringify(fact),
@@ -81,7 +81,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "https://rand-cat-facts-default-rtdb.firebaseio.com/facts.json"
+        "YOUR DATABASE"
       );
       if (!response.ok) {
         throw new Error("Something went wrong.");
@@ -109,7 +109,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "https://rand-cat-facts-default-rtdb.firebaseio.com/facts.json"
+        "YOUR DATABASE"
       );
       if (!response.ok) {
         throw new Error("Something went wrong!");
